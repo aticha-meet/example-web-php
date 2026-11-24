@@ -15,6 +15,7 @@ function show_alert(string $message, Type $type = Type::dng)
 
     $classType = $type->value;
 
+
     $icon = match ($type) {
         Type::dng => '⛔',
         Type::wrn => '⚠️',

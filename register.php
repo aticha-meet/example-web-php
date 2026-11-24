@@ -4,7 +4,6 @@ include "./components/ui/alert.php";
 include "./utils/db.php";
 
 $msg = '';
-
 $type = Type::dng;
 
 if (isset($_POST['reg_user'])) {
@@ -16,7 +15,7 @@ if (isset($_POST['reg_user'])) {
     // console_log_text($_POST['phone']);
     if (empty($firstName) || empty($lastName)) {
         $msg = "กรุณากรอกชื่อ-นามสกุล";
-        $type = Type::wrn;
+        $type = Type::dng;
     } elseif (empty($phone)) {
         $msg = "กรุณาเบอร์โทร";
         $type = Type::wrn;

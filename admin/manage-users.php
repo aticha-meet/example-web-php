@@ -1,12 +1,34 @@
 <?php
 include "../utils/utils.php";
 include "../utils/db.php";
+include "../components/ui/alert.php";
 // console_log_text("Hello World");
+
+enum TYPE_ROLE: string
+{
+    case admin = 'admin';
+    case user = 'user';
+}
+
+function updateUser(TYPE_ROLE $role)
+{
+    echo $role->value;
+}
+
+if (isset($_POST['role'], $_POST['user_id'])) {
+    $role = $_POST['role'];
+    $user_id = $_POST['user_id'];
+
+    $update_sql = "UPDATE `users` SET `role`='$role' WHERE user_id = '$user_id'";
+    if (mysqli_query($conn, $update_sql)) {
+        echo show_alert("Update Success", Type::scs);
+    } else {
+        echo show_alert("Update Failed", Type::dng);
+    }
+}
 
 $sql = "SELECT * FROM `users`";
 $result = mysqli_query($conn, $sql);
-
-// console_log($result)
 
 ?>
 
@@ -46,8 +68,9 @@ $result = mysqli_query($conn, $sql);
                         <tr>
                             <th>Name</th>
                             <th>Last Name</th>
-                            <th>Role</th>
                             <th>Phone num.</th>
+                            <th style="width: 15%;">Role</th>
+                            <th style="width: 20%;">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,7 +87,34 @@ $result = mysqli_query($conn, $sql);
                                     <?= $row['phone'] ?>
                                 </td>
                                 <td>
-                                    <?= $row['role'] ?>
+                                    <form method="post">
+                                        <input type="hidden"
+                                            name="user_id"
+                                            value="<?= $row['user_id'] ?>">
+
+
+                                        <select
+                                            onchange="this.form.submit()"
+                                            name="role"
+                                            class="content-role content-<?= $row['role'] ?>">
+                                            <option value="admin" <?= ($row['role']  === 'admin') 
+                                            ? 'selected' 
+                                            : ''; ?>>ADMIN</option>
+                                            <option value="user" <?= ($row['role']  === 'user') 
+                                            ? 'selected' 
+                                            : ''; ?>>USER</option>
+                                        </select>
+                                    </form>
+                                </td>
+                                <td>
+                                    <div class="action-box">
+                                        <div class="action-group">
+                                            🛠️ <p>Edit</p>
+                                        </div>
+                                        <div class="action-group delete">
+                                            🗑️ <p>Delete</p>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
