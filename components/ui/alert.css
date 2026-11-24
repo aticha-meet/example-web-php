@@ -1,0 +1,28 @@
+.alert-box {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    min-width: 280px;
+    padding: 15px 18px;
+    background-color: aquamarine;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    font-size: medium;
+    font-weight: 700;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+    border-left: 2px solid rgb(35, 0, 0);
+
+    animation: ease-in 0.3s ease-out, fadeOut 0.5s ease-in 3s forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+}
