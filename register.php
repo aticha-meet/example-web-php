@@ -17,24 +17,20 @@ if (isset($_POST['reg_user'])) {
     if (empty($firstName) || empty($lastName)) {
         $msg = "กรุณากรอกชื่อ-นามสกุล";
         $type = Type::wrn;
-    }
-
-    if (empty($phone)) {
+    } elseif (empty($phone)) {
         $msg = "กรุณาเบอร์โทร";
         $type = Type::wrn;
-
+    } elseif (empty($pass)) {
+        $msg = "กรุณารหัสผ่าน";
+        $type = Type::wrn;
+    } else {
         if (strlen($phone) < 10) {
             $msg = "กรุณาเบอร์โทรให้ครบ 10 หลัก";
             $type = Type::wrn;
         }
     }
 
-    if (empty($pass)) {
-        $msg = "กรุณารหัสผ่าน";
-        $type = Type::wrn;
-    }
-
-    if (!(empty($firstName) || empty($lastName) && !empty($phone) && !empty($pass))) {
+    if (empty($msg)) {
         $hashPassword = password_hash($pass, PASSWORD_DEFAULT);
         $sql = "INSERT INTO `users`(`firstName`, `lastName`, `phone`, `password`) 
         VALUES ('$firstName','$lastName','$phone','$hashPassword')";
@@ -42,8 +38,8 @@ if (isset($_POST['reg_user'])) {
         if (mysqli_query($conn, $sql)) {
             echo show_alert("Register Success", Type::scs);
 
-            header('location:login.php');
-            exit();
+            header("refresh:1.5; url=login.php");
+            // exit();
         } else {
             echo show_alert("Failed Regis", Type::dng);
         }

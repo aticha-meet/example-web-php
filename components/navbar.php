@@ -24,7 +24,7 @@
 
         <?php
         if (isset($_SESSION['role']) && ($_SESSION['role'] === "admin")) {
-            echo "<a class='a-group' href='#'>Admin</a>";
+            echo "<a class='a-group' href='admin/admin.php'>Admin</a>";
         }
         ?>
 

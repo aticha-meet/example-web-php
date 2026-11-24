@@ -16,19 +16,15 @@ if (isset($_POST['login_user'])) {
     if (empty($phone)) {
         $msg = "กรุณาเบอร์โทร";
         $type = Type::wrn;
-
-        if (strlen($phone) < 10) {
-            $msg = "กรุณาเบอร์โทรให้ครบ 10 หลัก";
-            $type = Type::wrn;
-        }
-    }
-
-    if (empty($pass)) {
+    } elseif (strlen($phone) < 10) {
+        $msg = "กรุณาเบอร์โทรให้ครบ 10 หลัก";
+        $type = Type::wrn;
+    } elseif (empty($pass)) {
         $msg = "กรุณารหัสผ่าน";
         $type = Type::wrn;
     }
 
-    if (!empty($phone) && !empty($pass)) {
+    if (empty($msg)) {
         $sql = "SELECT * FROM `users` WHERE phone = '$phone'";
         $result = mysqli_query($conn, $sql);
 
@@ -41,8 +37,7 @@ if (isset($_POST['login_user'])) {
                 $_SESSION['role'] = $row['role'];
 
                 echo show_alert($msg, $type);
-                header("location:index.php");
-                exit();
+                header("refresh:1.5; url=index.php");
             }
         } else {
             echo show_alert("Login Failed", Type::dng);

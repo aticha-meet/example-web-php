@@ -57,3 +57,74 @@ body {
     border-radius: 10px;
     border: 0;
 }
+
+/* ครอบตารางเพื่อให้เลื่อนซ้าย-ขวาได้บนหน้าจอมือถือ (Responsiveness) */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* โครงสร้างหลักของตาราง */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    /* รวมเส้นขอบให้เป็นเส้นเดียว ไม่ซ้อนกัน */
+    background-color: #ffffff;
+    font-size: 14px;
+}
+
+/* ส่วนหัวตาราง (Header) */
+th {
+    background-color: #1b5e20;
+    /* สีเขียวเข้มธีม Green Waste */
+    color: #ffffff;
+    font-weight: bold;
+    text-align: left;
+    padding: 12px 15px;
+}
+
+/* ช่องข้อมูลแต่ละแถว (Data Cells) */
+td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e0e0e0;
+    /* ตีเส้นคั่นเฉพาะแนวนอน ดูโปร่งและสะอาดตากว่าเส้นตารางทึบ */
+    color: #333333;
+}
+
+/* สลับสีแถวคู่-คี่ (Zebra Striping) ให้อ่านง่ายไม่ลายตา */
+tbody tr:nth-child(even) {
+    background-color: #008e55;
+}
+
+/* เปลี่ยนสีแถวเมื่อนำเมาส์ไปชี้ (Hover Effect) */
+tbody tr:hover {
+    background-color: #e8f5e9;
+    transition: background-color 0.2s ease;
+}
+
+/* ป้ายสถานะ (Badge) สำหรับคอลัมน์ Role หรือ Status */
+.badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.badge-green {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.badge-red {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+.badge-blue {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}

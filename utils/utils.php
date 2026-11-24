@@ -7,7 +7,7 @@ function console_log(mysqli_result $mysql_fetch_data)
 
     echo "
         <script>
-            const users = $json;
+            let users = $json;
             console.log(users);
         </script>
     ";
