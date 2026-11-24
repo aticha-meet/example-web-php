@@ -10,11 +10,6 @@ enum TYPE_ROLE: string
     case user = 'user';
 }
 
-function updateUser(TYPE_ROLE $role)
-{
-    echo $role->value;
-}
-
 if (isset($_POST['role'], $_POST['user_id'])) {
     $role = $_POST['role'];
     $user_id = $_POST['user_id'];
@@ -97,12 +92,12 @@ $result = mysqli_query($conn, $sql);
                                             onchange="this.form.submit()"
                                             name="role"
                                             class="content-role content-<?= $row['role'] ?>">
-                                            <option value="admin" <?= ($row['role']  === 'admin') 
-                                            ? 'selected' 
-                                            : ''; ?>>ADMIN</option>
-                                            <option value="user" <?= ($row['role']  === 'user') 
-                                            ? 'selected' 
-                                            : ''; ?>>USER</option>
+                                            <option value="admin" <?= ($row['role']  === 'admin')
+                                                                        ? 'selected'
+                                                                        : ''; ?>>ADMIN</option>
+                                            <option value="user" <?= ($row['role']  === 'user')
+                                                                        ? 'selected'
+                                                                        : ''; ?>>USER</option>
                                         </select>
                                     </form>
                                 </td>
